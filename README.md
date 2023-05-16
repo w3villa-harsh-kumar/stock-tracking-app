@@ -103,3 +103,13 @@ rails generate devise:controllers users
 ```
 rails generate devise:routes
 ```
+
+### 14. How to open credentials.yml.enc file in Rails?
+```
+EDITOR="code --wait" rails credentials:edit
+```
+
+### 15. How to read the credentials in Rails?
+```
+Rails.application.credentials.<credential_name>
+```
