@@ -1,0 +1,29 @@
+<h1>My Friends</h1>
+<div class="stock-search">
+  <h3>Search for Friends </h3>
+    <%= form_tag search_friends_path, remote:true, method: :get do %>
+        <div class="form-group row">
+        <div class="col-sm-9 px-0 pl-3">
+            <%= text_field_tag :friend, params[:friend], placeholder: "Enter friend's name or email", class: "form-control" %>
+        </div>
+        <div class="col-sm-3 px-0">
+            <%= submit_tag "Search", class: "btn btn-primary" %>
+        </div>
+        </div>
+    <% end %>
+</div>
+
+<div id="friends">
+</div>
+
+
+<% if @friends.length == 0 %>
+  <div class="row">
+    <div class="col-sm-9">
+      <h3>You have no friends</h3>
+    </div>
+  </div>
+<% end %>
+<% if @friends.length > 0 %>
+  <%= render "friends/list" %>
+<% end %>

@@ -1,0 +1,33 @@
+<div class="stock-info mb-3">
+  <div class="row">
+    <div class="col-md-9">
+      <%= render "layouts/messages" %>
+      <% if @friends %>
+        <h3>Search Result</h3>
+        <div class="card card-header">
+          <table class="col-md-12">
+            <tbody>
+              <% @friends.each do |friend| %>
+                <tr>
+                  <td><strong>Name: </strong><%= friend.full_name %></td>
+                  <td><strong>Email: </strong><%= friend.email %></td>
+                  <td>
+                    <strong>Actions: </strong>
+                    <%= link_to "View Profile", user_path(friend), class: "btn btn-primary" %>
+                    <% if current_user.not_friends_with?(friend.id)  %>
+                      <%= link_to "Add Friend", friendships_path(friend: friend), method: :post, class: "btn btn-success" %>
+                    <% else %>
+                      <span class="badge badge-pill badge-secondary">
+                        You are friends
+                      </span>
+                    <% end %>
+                  </td>
+                </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

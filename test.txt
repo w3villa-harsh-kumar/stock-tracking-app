@@ -1,0 +1,13 @@
+<% if current_user.can_track_stock? %>
+              <%= link_to "Add to portfolio", user_stocks_path(user: current_user, ticker_symbol: @stock.ticker_symbol), method: :post, class: "btn btn-primary" %>
+            <% else %>
+              <span class="badge badge-secondary">
+                You are already tracking
+                <% if current_user.under_stock_limit? %>
+                  10 stocks
+                <% end %>
+                <% if current_user.stock_already_tracked? %>
+                  this stock
+                <% end %>
+              </span>
+            </div>

@@ -1,0 +1,36 @@
+<h1>User Details</h1>
+<div class="row my-3">
+  <div class="col-md-6">
+    <div class="card card-header">
+      <table class="col-md-12">
+        <tbody>
+          <tr>
+            <td><strong>Name: </strong><%= @user.full_name %></td>
+            <td><strong>Email: </strong><%= @user.email %></td>
+            <td>
+              <% if current_user.not_friends_with?(@user.id)  %>
+                <%= link_to "Add Friend", friendships_path(friend: @user), method: :post, class: "btn btn-success" %>
+              <% else %>
+                <span class="badge-md badge-pill badge-success">
+                  You are friends
+                </span>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% if @user_stocks.empty? %>
+  <div class="row">
+    <div class="col-sm-9">
+      <h3><%= @user.full_name %> have no stocks in its portfolio</h3>
+    </div>
+  </div>
+<% end %>
+<% if !@user_stocks.empty? %>
+  <%= render "stocks/list" %>
+<% end %>
+

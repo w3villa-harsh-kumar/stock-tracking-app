@@ -1,0 +1,28 @@
+<h1>My Portfolio</h1>
+<div class="stock-search">
+  <h3>Search for stocks </h3>
+  <%= form_tag search_stocks_path, remote:true, method: :get do %>
+    <div class="form-group row">
+      <div class="col-sm-9 px-0 pl-3">
+        <%= text_field_tag :stock, params[:stock], placeholder: "Stock ticker symbol", class: "form-control" %>
+      </div>
+      <div class="col-sm-3 px-0">
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div id="results">
+</div>
+
+<% if @user_stocks.empty? %>
+  <div class="row">
+    <div class="col-sm-9">
+      <h3>You have no stocks in your portfolio</h3>
+    </div>
+  </div>
+<% end %>
+
+<% if !@user_stocks.empty? %>
+  <%= render "stocks/list" %> 
+<% end %>

@@ -113,3 +113,38 @@ EDITOR="code --wait" rails credentials:edit
 ```
 Rails.application.credentials.<credential_name>
 ```
+
+### 16. How to create a new many to many relationship resource in Rails?
+```
+rails g resource <resource_name> <resource_name>:references <resource_name>:references
+```
+e.g.
+```
+rails g resource UserStock user:references stock:references
+```
+
+### 17. What is self referential association in Rails?
+Self referential association is a relationship where a model has a relation to itself. For example, a user can have many friends and a friend can also have many friends.
+e.g.
+```
+class User < ApplicationRecord
+  has_many :friendships
+  has_many :friends, through: :friendships
+end
+
+class Friendship < ApplicationRecord
+  belongs_to :user
+  belongs_to :friend, class_name: 'User'
+end
+```
+
+### 18. How to create a new self referential association in Rails?
+```
+rails g model <model_name> <model_name>:references
+```
+e.g.
+```
+rails g model Friendship user:references
+```
+
+
